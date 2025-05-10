@@ -103,10 +103,26 @@ async def approve(event):
     await event.respond("**User approved. You may DM now.**")
     await event.delete()
 
+@bot.on(events.NewMessage(outgoing=True, pattern=r"\.disapprove"))
+async def disapprove(event):                                     
+    reply = await event.get_reply_message()
+    if reply and reply.sender_id in approved_users:
+        approved_users.remove(reply.sender_id)
+        await event.respond("User disapproved.")
+    await event.delete()
+
 @bot.on(events.NewMessage(outgoing=True, pattern=r"\.block"))
 async def block(event):
     sender = await event.get_sender()
     approved_users.discard(sender.id)
     await bot(BlockRequest(sender.id))
     await event.respond("**User blocked.**")
+    await event.delete()
+
+@bot.on(events.NewMessage(outgoing=True, pattern=r"\.unblock"))
+async def unblock_user(event):
+    reply = await event.get_reply_message()                           
+    if reply:
+        await bot(UnblockRequest(reply.sender_id))
+        await event.respond("User unblocked.")
     await event.delete()
