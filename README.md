@@ -1,11 +1,11 @@
 # DM-USER-BOT 
 # important point 
-use Your API ID
-or API HASH
+
+# use Your API ID or API HASH
 
 its just a telegram user bot repo having some features with 
 
-========BASIC COMMONDS========
+# ========BASIC COMMONDS========
 
 .alive to chek user bot alive or not
  
@@ -23,7 +23,7 @@ its just a telegram user bot repo having some features with
 
 .restart to restart the bot 
 
-========DM PROTECTION COMMONDS========
+# ========DM PROTECTION COMMONDS========
 
 .approve (reply) to approve someone in dm 
 
