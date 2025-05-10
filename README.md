@@ -1,6 +1,9 @@
-# DM-USER-BOT
-its just a telegram user bot repo having some features with 
+# DM-USER-BOT 
+# important point 
+use Your API ID
+or API HASH
 
+its just a telegram user bot repo having some features with 
 
 ========BASIC COMMONDS========
 
