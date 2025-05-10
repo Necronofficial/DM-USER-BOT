@@ -1,12 +1,10 @@
-
-from telethon import TelegramClient, events
-from telethon.tl.functions.channels import JoinChannelRequest, LeaveChannelRequest
+from telethon import TelegramClient, events                                                                                                                                      from telethon.tl.functions.channels import JoinChannelRequest, LeaveChannelRequest
 from telethon.tl.functions.contacts import BlockRequest, UnblockRequest
 import time, os, sys
 
 # Bot login
-api_id = 123456
-api_hash = 'apni daal bhai '
+api_id = 111111 #your api id
+api_hash = 'your id hash'
 bot = TelegramClient('session', api_id, api_hash)
 bot.start()
 
@@ -96,33 +94,38 @@ async def dm_guard(event):
 
 # ========== APPROVE / BLOCK COMMANDS ==========
 
+
 @bot.on(events.NewMessage(outgoing=True, pattern=r"\.approve"))
 async def approve(event):
-    sender = await event.get_sender()
-    approved_users.add(sender.id)
-    await event.respond("**User approved. You may DM now.**")
+    reply = await event.get_reply_message()
+    if reply:
+        approved_users.add(reply.sender_id)
+        await event.respond("**User approved.**")
     await event.delete()
 
 @bot.on(events.NewMessage(outgoing=True, pattern=r"\.disapprove"))
-async def disapprove(event):                                     
+async def disapprove(event):
     reply = await event.get_reply_message()
     if reply and reply.sender_id in approved_users:
         approved_users.remove(reply.sender_id)
-        await event.respond("User disapproved.")
+        await event.respond("**User disapproved.**")
     await event.delete()
 
 @bot.on(events.NewMessage(outgoing=True, pattern=r"\.block"))
-async def block(event):
-    sender = await event.get_sender()
-    approved_users.discard(sender.id)
-    await bot(BlockRequest(sender.id))
-    await event.respond("**User blocked.**")
+async def block_user(event):
+    reply = await event.get_reply_message()
+    if reply:
+        await bot(BlockRequest(reply.sender_id))
+        await event.respond("**User blocked.**")
     await event.delete()
 
-@bot.on(events.NewMessage(outgoing=True, pattern=r"\.unblock"))
-async def unblock_user(event):
-    reply = await event.get_reply_message()                           
+@bot.on(events.NewMessage(outgoing=True, pattern=r"\.unblock"))                                                                      async def unblock_user(event):
+    reply = await event.get_reply_message()
     if reply:
         await bot(UnblockRequest(reply.sender_id))
-        await event.respond("User unblocked.")
+        await event.respond("**User unblocked.**")
     await event.delete()
+
+print("Real Userbot is running...")
+bot.run_until_disconnected()
+
