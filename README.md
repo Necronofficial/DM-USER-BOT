@@ -1,7 +1,7 @@
 # DM-USER-BOT 
 # important point 
 
-# use Your API ID or API HASH
+# use Your API ID or API HASH chaho to session name bhi change kr lo mai kuxh nhi bolunga 😘
 
 its just a telegram user bot repo having some features with 
 
