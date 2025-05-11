@@ -1,11 +1,12 @@
-from telethon import TelegramClient, events                                                                                                                                      from telethon.tl.functions.channels import JoinChannelRequest, LeaveChannelRequest
+from telethon import TelegramClient, events              
+from telethon.tl.functions.channels import JoinChannelRequest, LeaveChannelRequest
 from telethon.tl.functions.contacts import BlockRequest, UnblockRequest
 import time, os, sys
 
 # Bot login
-api_id = 111111 #your api id
-api_hash = 'your id hash'
-bot = TelegramClient('session', api_id, api_hash)
+api_id = 25341716 #your api id
+api_hash = 'ahfgvjhfvfgfgff23kh3f23f23y'  #YOUR API HASH
+bot = TelegramClient('session_bot', api_id, api_hash)
 bot.start()
 
 approved_users = set()
@@ -119,7 +120,8 @@ async def block_user(event):
         await event.respond("**User blocked.**")
     await event.delete()
 
-@bot.on(events.NewMessage(outgoing=True, pattern=r"\.unblock"))                                                                      async def unblock_user(event):
+@bot.on(events.NewMessage(outgoing=True, pattern=r"\.unblock"))                                   
+async def unblock_user(event):
     reply = await event.get_reply_message()
     if reply:
         await bot(UnblockRequest(reply.sender_id))
@@ -128,4 +130,3 @@ async def block_user(event):
 
 print("Real Userbot is running...")
 bot.run_until_disconnected()
-
